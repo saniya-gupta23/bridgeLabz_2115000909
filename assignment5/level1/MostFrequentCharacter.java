@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class MostFrequentCharacter {
     public static void main(String[] args) {
         String str = "success";
@@ -8,19 +6,26 @@ public class MostFrequentCharacter {
     }
 
     public static char findMostFrequentCharacter(String str) {
-        int[] frequency = new int[256];  // Array to store frequency of each character
+        int[] frequency = new int[256];
         int maxCount = 0;
         char mostFrequentChar = '\0';
-        
-        // Count frequency of each character
-        for (char c : str.toCharArray()) {
-            frequency[c]++;
-            if (frequency[c] > maxCount) {
-                maxCount = frequency[c];
-                mostFrequentChar = c;
+
+        int i = 0;
+        while (true) {
+            try {
+                char c = str.charAt(i);
+                frequency[c]++;
+
+                if (frequency[c] > maxCount) {
+                    maxCount = frequency[c];
+                    mostFrequentChar = c;
+                }
+                i++;
+            } catch (Exception e) {
+                break;
             }
         }
-        
+
         return mostFrequentChar;
     }
 }

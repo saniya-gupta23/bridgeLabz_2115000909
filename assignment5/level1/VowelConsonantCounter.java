@@ -1,34 +1,47 @@
 import java.util.Scanner;
 
+class VowelChecker {
+    static boolean checkVowel(char ch) {
+        char[] vowels = {'a', 'e', 'i', 'o', 'u'};
+        for (char v : vowels) {
+            if (ch == v) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
 public class VowelConsonantCounter {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        
-    
-        System.out.print("Enter a string: ");
-        String input = scanner.nextLine();
-       
+    public void countVowelsConsonants(String str) {
         int vowelCount = 0, consonantCount = 0;
-        input = input.toLowerCase(); // Convert to lowercase for uniformity
+        char[] arr = str.toCharArray();
         
-        for (char ch : input.toCharArray()) {
-            if (Character.isLetter(ch)) { // Check if character is a letter
-                if (isVowel(ch)) {
+        for (int i = 0; i < arr.length; i++) {
+            char ch = arr[i];
+            if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) {
+                if (ch >= 'A' && ch <= 'Z') {
+                    ch = (char) (ch + 32);
+                }
+                if (VowelChecker.checkVowel(ch)) {
                     vowelCount++;
                 } else {
                     consonantCount++;
                 }
             }
         }
-   
+
         System.out.println("Number of vowels: " + vowelCount);
         System.out.println("Number of consonants: " + consonantCount);
-        
-        scanner.close();
     }
-   
-    private static boolean isVowel(char ch) {
-        return "aeiou".indexOf(ch) != -1;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        VowelConsonantCounter counter = new VowelConsonantCounter();
+        System.out.print("Enter a string: ");
+        String input = scanner.nextLine();
+        counter.countVowelsConsonants(input);
+        
     }
 }
 

@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.Scanner;
 
 public class AnagramChecker {
     public static void main(String[] args) {
@@ -29,10 +29,27 @@ public class AnagramChecker {
         char[] charArray1 = str1.toCharArray();
         char[] charArray2 = str2.toCharArray();
 
-        Arrays.sort(charArray1);
-        Arrays.sort(charArray2);
+        sortArray(charArray1);
+        sortArray(charArray2);
 
-        return Arrays.equals(charArray1, charArray2);
+        for (int i = 0; i < charArray1.length; i++) {
+            if (charArray1[i] != charArray2[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void sortArray(char[] array) {
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int j = i + 1; j < array.length; j++) {
+                if (array[i] > array[j]) {
+                    char temp = array[i];
+                    array[i] = array[j];
+                    array[j] = temp;
+                }
+            }
+        }
     }
 }
 
