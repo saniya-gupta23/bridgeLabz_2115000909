@@ -2,46 +2,37 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class NumberGuessingGame {
-    private static int lowerBound = 1;
-    private static int upperBound = 100;
-    private static Random random = new Random();
-
     public static void main(String[] args) {
+        playGame();
+    }
+    
+    public static void playGame() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Think of a number between 1 and 100, and I will try to guess it!");
-        
+        Random random = new Random();
+        int low = 1;
+        int high = 100;
         boolean guessedCorrectly = false;
         
         while (!guessedCorrectly) {
-            int guess = generateGuess();
-            System.out.println("Is your number " + guess + "? (Enter 'high', 'low', or 'correct')");
-            String feedback = scanner.next().toLowerCase();
+            int guess = generateGuess(low, high, random);
+            System.out.println("Is your number " + guess + "? (Enter 'h' for high, 'l' for low, 'c' for correct)");
+            char response = scanner.next().charAt(0);
             
-            guessedCorrectly = processFeedback(guess, feedback);
+            if (response == 'c') {
+                guessedCorrectly = true;
+                System.out.println("The computer guessed your number correctly!");
+            } else if (response == 'h') {
+                high = guess - 1;
+            } else if (response == 'l') {
+                low = guess + 1;
+            }
         }
         
-        System.out.println("Yay! I guessed your number!");
         scanner.close();
     }
-
-    private static int generateGuess() {
-        return lowerBound + random.nextInt(upperBound - lowerBound + 1);
-    }
-
-    private static boolean processFeedback(int guess, String feedback) {
-        switch (feedback) {
-            case "high":
-                upperBound = guess - 1;
-                break;
-            case "low":
-                lowerBound = guess + 1;
-                break;
-            case "correct":
-                return true;
-            default:
-                System.out.println("Invalid input. Please enter 'high', 'low', or 'correct'.");
-        }
-        return false;
+    
+    public static int generateGuess(int low, int high, Random random) {
+        return low + random.nextInt(high - low + 1);
     }
 }
 

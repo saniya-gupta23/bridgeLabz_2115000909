@@ -1,29 +1,29 @@
 import java.util.Scanner;
 
 public class FactorialUsingRecursion {
-
-    public static int getInput() {
+    public static void main(String[] args) {
+        calculateFactorial();
+    }
+    
+    public static void calculateFactorial() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a number: ");
+        int number = getInput(scanner, "Enter a number: ");
+        
+        long result = factorial(number);
+        System.out.println("The factorial of " + number + " is: " + result);
+        
+        scanner.close();
+    }
+    
+    public static int getInput(Scanner scanner, String message) {
+        System.out.print(message);
         return scanner.nextInt();
     }
-
-    public static int calculateFactorial(int n) {
-        if (n == 0 || n == 1) {
+    
+    public static long factorial(int number) {
+        if (number == 0 || number == 1) {
             return 1;
-        } else {
-            return n * calculateFactorial(n - 1);
         }
-    }
-
-    public static void displayResult(int result) {
-        System.out.println("The factorial is: " + result);
-    }
-
-    public static void main(String[] args) {
-        int number = getInput();
-        int factorial = calculateFactorial(number);
-        displayResult(factorial);
+        return number * factorial(number - 1);
     }
 }
-

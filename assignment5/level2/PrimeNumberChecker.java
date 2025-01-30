@@ -2,24 +2,35 @@ import java.util.Scanner;
 
 public class PrimeNumberChecker {
     public static void main(String[] args) {
+        checkPrime();
+    }
+    
+    public static void checkPrime() {
         Scanner scanner = new Scanner(System.in);
+        int number = getInput(scanner, "Enter a number: ");
         
-        System.out.println("Enter a number:");
-        int num = scanner.nextInt();
-        
-        if (isPrime(num)) {
-            System.out.println(num + " is a prime number.");
+        if (isPrime(number)) {
+            System.out.println(number + " is a prime number.");
         } else {
-            System.out.println(num + " is not a prime number.");
+            System.out.println(number + " is not a prime number.");
         }
         
         scanner.close();
     }
     
-    private static boolean isPrime(int num) {
-        if (num <= 1) return false;
-        for (int i = 2; i <= Math.sqrt(num); i++) {
-            if (num % i == 0) return false;
+    public static int getInput(Scanner scanner, String message) {
+        System.out.print(message);
+        return scanner.nextInt();
+    }
+    
+    public static boolean isPrime(int number) {
+        if (number <= 1) {
+            return false;
+        }
+        for (int i = 2; i * i <= number; i++) {
+            if (number % i == 0) {
+                return false;
+            }
         }
         return true;
     }
